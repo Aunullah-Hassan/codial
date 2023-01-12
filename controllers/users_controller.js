@@ -1,3 +1,5 @@
+const User=require('../models/user');
+
 module.exports.profile=function(req,res){
     // return res.end('<h1>Users Profile Controller');
 
@@ -22,10 +24,35 @@ module.exports.signIn=function(req,res){
 
 // Get the Sign up data
 module.exports.create=function(req,res){
-    // code later
+    console.log(req.body);
+    if(req.body.password != req.body.confirm_password){
+        return res.redirect('back');
+    }
+
+    User.findOne({email:req.body.email},function(error,user){
+        if(error){
+            console.log('error in finding user in signing Up');
+            return;
+        }
+        if(!user){
+            User.create(req.body,function(error,user){
+                if(error){
+                    console.log('error in creating user while signing Up');
+                    return;
+                } 
+
+                return res.redirect('/users/sign-in');
+            });
+        }
+        else{
+            return res.redirect('back');
+        }
+
+    });
+
 }
 
 // Sign In and create the session for the user
-module.exports.signIn=function(req,res){
+module.exports.createSession=function(req,res){
     // code later
 }
