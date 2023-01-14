@@ -10,6 +10,10 @@ module.exports.profile=function(req,res){
 
 // Render the sign Up Page
 module.exports.signUp=function(req,res){
+    // if user is already signed in then he/she will not be able to acces sign up page
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_up',{
         title: "Codial | Sign Up"
     });
@@ -17,6 +21,11 @@ module.exports.signUp=function(req,res){
 
 // Render the Sign In Page
 module.exports.signIn=function(req,res){
+
+    // if user is already signed in then he/she will not be able to acces sign in page
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_in',{
         title: "Codial | Sign In"
     });
