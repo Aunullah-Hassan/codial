@@ -1,0 +1,33 @@
+header{
+    background-color: blue;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+        #header-logo{
+            height: 60%;
+            font-size: 1.2rem;
+            font-family: monospace;
+                #logo-text{
+                    color: white;
+                    font-weight: 700;
+                        a{
+                            color: white;
+                        }
+                }
+        }
+        #header-nav{
+            margin: 0;
+            list-style: none;
+            display: flex;
+            padding: 0;
+            height: 100%;
+            align-items: center;
+            width: 125px;
+            justify-content: space-around;
+                a{
+                    color: white;
+                }
+        }
+}
