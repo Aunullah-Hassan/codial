@@ -29,9 +29,29 @@ module.exports.create=function(req,res){
 module.exports.destroy=function(req,res){
 
     Comment.findById(req.params.id,function(err,comment){
-        
+        // console.log('comment fetched')
+        if(!(comment.user == req.user.id)){
+            // console.log('post and user in if block')
+            // let post_id=comment.post.id;
+            // console.log(comment.post.toString());
+            Post.findById(comment.post.toString(),function(err,post){
+                if(err){console.log(err);
+                    return;
+                }
+                // console.log('post fetched')
+                if(post.user.toString() == req.user.id){
+                    console.log('post and user matched')
+                    comment.remove();
 
-        if(comment.user == req.user.id){
+                    Post.findByIdAndUpdate(post.id,{ $pull: {comments: req.params.id} },function(err,post){
+                        return res.redirect('back');
+                    });
+                }
+               
+            })
+        }
+
+       else if(comment.user == req.user.id){
         // Before deleting comment i need to store the postid to delete this comment from comments[] of post
             let postId=comment.post;
 
