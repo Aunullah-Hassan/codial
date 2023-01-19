@@ -2,10 +2,16 @@ const User=require('../models/user');
 
 module.exports.profile=function(req,res){
     // return res.end('<h1>Users Profile Controller');
+    User.findById(req.params.id,function(err,user){
 
-    return res.render('user_profile',{
-        title:'Users Home'
+        return res.render('user_profile',{
+            title:'Users Home',
+            profile_user:user
+        });
+// in above statement we need to be careful while deciding key as user already exists in local so i use profile_user
     });
+
+    
 }
 
 // Render the sign Up Page
