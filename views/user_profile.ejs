@@ -3,7 +3,21 @@
 <!-- But this will be included in body off layout.ejs file  -->
     <h1>Profile \ <%= title %> </h1>
 
-    <p> <%= profile_user.name %> </p>
-    <p> <%= profile_user.email %> </p>
-
     
+
+    <% if(locals.user.id == profile_user.id){ %>
+    <!-- If user logged in matches to that of profile user then show the form -->
+
+        <form action="/users/update/<%= profile_user.id %>" method="post">
+            <input type="text" name="name" value="<%=profile_user.name %>" required placeholder="Your Name">
+            <input type="email" name="email" value="<%=profile_user.email %>" required placeholder="Your Email">
+            <input type="submit" value="Update">
+
+        </form>
+    
+    <% } else{ %>
+<!-- Else Show only the profile Info -->
+        <p> <%= profile_user.name %> </p>
+        <p> <%= profile_user.email %> </p>
+
+    <% } %>

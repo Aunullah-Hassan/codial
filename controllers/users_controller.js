@@ -14,6 +14,19 @@ module.exports.profile=function(req,res){
     
 }
 
+module.exports.update=function(req,res){
+    if(req.user.id == req.params.id){
+        // User.findByIdAndUpdate(req.params.id,{name:req.body.name,email:req.body.email});
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('back');
+        });
+
+    }else{
+        // someone fiddled with our form means logged in user can update the profile of other user by inspect
+        return res.status(401).send('Unauthorized');
+    }
+}
+
 // Render the sign Up Page
 module.exports.signUp=function(req,res){
     // if user is already signed in then he/she will not be able to acces sign up page
