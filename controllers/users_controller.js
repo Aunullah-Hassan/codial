@@ -82,6 +82,7 @@ module.exports.create=function(req,res){
 
 // Sign In and create the session for the user
 module.exports.createSession=function(req,res){
+    req.flash('success','Logged in Succesfully');
     return res.redirect('/');
 }
 
@@ -93,6 +94,10 @@ module.exports.destroySession=function(req,res,next){
 
     req.logout(function(err) {
         if (err) { return next(err); }
+
+        req.flash('success','You have Logged out');
+        // res.redirect('/',{flash: {success: ""}});
+// becoz i need to send this flash message on the response----------
         res.redirect('/');
       });
 }
