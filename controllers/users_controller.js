@@ -1,5 +1,6 @@
 const User=require('../models/user');
 
+// let's keep it same as before
 module.exports.profile=function(req,res){
     // return res.end('<h1>Users Profile Controller');
     User.findById(req.params.id,function(err,user){
@@ -17,12 +18,19 @@ module.exports.profile=function(req,res){
 module.exports.update=function(req,res){
     if(req.user.id == req.params.id){
         // User.findByIdAndUpdate(req.params.id,{name:req.body.name,email:req.body.email});
+
         User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            if(err){
+                req.flash(err);
+                return res.redirect('back');
+            }
+            req.flash('success','Profile Updated!');
             return res.redirect('back');
         });
 
     }else{
         // someone fiddled with our form means logged in user can update the profile of other user by inspect
+        req.flash('error','Unauthorized');
         return res.status(401).send('Unauthorized');
     }
 }
@@ -33,6 +41,7 @@ module.exports.signUp=function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/users/profile');
     }
+
     return res.render('user_sign_up',{
         title: "Codial | Sign Up"
     });
@@ -52,27 +61,32 @@ module.exports.signIn=function(req,res){
 
 // Get the Sign up data
 module.exports.create=function(req,res){
-    console.log(req.body);
+    // console.log(req.body);
     if(req.body.password != req.body.confirm_password){
+        req.flash('error',"password does not matched");
         return res.redirect('back');
     }
 
     User.findOne({email:req.body.email},function(error,user){
         if(error){
-            console.log('error in finding user in signing Up');
+            // console.log('error in finding user in signing Up');
+            req.flash('error',error)
             return;
         }
         if(!user){
             User.create(req.body,function(error,user){
                 if(error){
-                    console.log('error in creating user while signing Up');
+                    // console.log('error in creating user while signing Up');
+                    req.flash('error',error);
                     return;
                 } 
 
+                req.flash('success','Succesfully signed up please Log in!')
                 return res.redirect('/users/sign-in');
             });
         }
         else{
+            req.flash('error','This user already exists');
             return res.redirect('back');
         }
 

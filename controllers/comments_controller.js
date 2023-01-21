@@ -18,12 +18,15 @@ module.exports.create=async function(req,res){
             post.comments.push(comment);
             post.save();
 
+            req.flash('success','comment added!');
+
             return res.redirect('/');
 
         }
 
     }catch(err){
-        console.log('Error :',err);
+        // console.log('Error :',err);
+        req.flash('error',err);
         return;
     }
 
@@ -63,10 +66,11 @@ module.exports.destroy=async function(req,res){
             let post = await Post.findById(comment.post.toString());
     
             if(post.user.toString() == req.user.id){
-                console.log('post and user matched')
+                // console.log('post and user matched');
                 comment.remove();
                 await Post.findByIdAndUpdate(post.id,{ $pull: {comments: req.params.id} });
-    
+                
+                req.flash('success','comment deleted succesfully !');
                 return res.redirect('back');
             }
     
@@ -78,14 +82,18 @@ module.exports.destroy=async function(req,res){
                 comment.remove();
     
                 await Post.findByIdAndUpdate(postId,{ $pull: {comments: req.params.id} });
+
+                req.flash('success','comment deleted succesfully !');
                 return res.redirect('back');
     
         }else{
+                req.flash('error','Unauthorized !');
                 return res.redirect('back');
             }
 
     }catch(err){
-        console.log('Error :',err);
+        // console.log('Error :',err);
+        req.flash('error',err);
         return;
     }
 
