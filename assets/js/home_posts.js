@@ -18,10 +18,27 @@
                     let newPost=newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
 
-                    // console.log(data.data.data);
-                    // console.log(data);
+                    $(`#post-${data.data.post_id}`).remove();
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Post and Published Succesfully! by Async',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+                    deletePost($(' .delete-post-button>a',newPost));
+
                 },error: function(error){
                     console.log(error.responseText());
+                    
+                    new Noty({
+                        theme: 'relax',
+                        text: error,
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+
                 }
             });
 
@@ -35,7 +52,7 @@
         <p>
             
                 <small class="delete-post-button">
-                    <a href="/posts/destroy/${post.id}">X</a>
+                    <a href="/posts/destroy/${post._id}">X</a>
                 </small>
            
     
@@ -60,6 +77,45 @@
         </div>
         
     </li>`)
+
+    }
+
+    // Method to delete a post from DOM
+    let deletePost=function(deleteLink){
+            console.log(deleteLink);
+            console.log($(deleteLink).attr("href"));
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).attr('href'),
+                success: function(data){
+                    // console.log(data);
+                    $(`#post-${data.data.post_id}`).remove();
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Post and associated comments Deleted Succesfully! by Async',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+
+                },error: function(error){
+                    console.log(error.responseText);
+
+                    new Noty({
+                        theme: 'relax',
+                        text: 'you cannot delete this post Async',
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+
+                }
+            });
+
+        });
 
     }
 
