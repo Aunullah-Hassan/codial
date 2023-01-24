@@ -15,10 +15,12 @@
                 url: '/posts/create',
                 data: newPostForm.serialize(),
                 success: function(data){
+                    console.log(data);
                     let newPost=newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
 
-                    $(`#post-${data.data.post_id}`).remove();
+                    deletePost($(' .delete-post-button>a',newPost));
+
                     new Noty({
                         theme: 'relax',
                         text: 'Post and Published Succesfully! by Async',
@@ -26,10 +28,10 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
-                    deletePost($(' .delete-post-button>a',newPost));
+                    
 
                 },error: function(error){
-                    console.log(error.responseText());
+                    console.log(error.responseText);
                     
                     new Noty({
                         theme: 'relax',
@@ -82,8 +84,8 @@
 
     // Method to delete a post from DOM
     let deletePost=function(deleteLink){
-            console.log(deleteLink);
-            console.log($(deleteLink).attr("href"));
+            // console.log(deleteLink);
+            // console.log($(deleteLink).attr("href"));
         $(deleteLink).click(function(e){
             e.preventDefault();
 
@@ -119,6 +121,20 @@
 
     }
 
+//Method to Add AJAX deletion to all the posts which are already present on the page (before adding a new one)
+
+    $( document ).ready( function(){
+        let deleteLinks=$('#posts-list-container li small a');
+        
+        console.log(deleteLinks);
+
+        for(let i = 0; i <deleteLinks.length; i++){
+            
+            deletePost(deleteLinks[i]);
+
+        }
+
+    } );
 
     createPost();
 

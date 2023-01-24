@@ -1,5 +1,6 @@
 const Post=require('../models/post');
 const Comment=require('../models/comment');
+const User=require('../models/user');
 
 module.exports.create= async function(req,res){
 
@@ -22,12 +23,19 @@ module.exports.create= async function(req,res){
             content: req.body.content,
             user: req.user._id
         });
+        
 
+        
+        
+        // post.populate('user');
         if(req.xhr){
+               
+                await post.populate( 'user' ); // Works as expected
+               
 
                 return res.status(200).json({
                     data:{
-                        post: post
+                        post: post,
                     },
                     message: 'Post Created !'
                 });
@@ -90,7 +98,7 @@ module.exports.destroy=async function(req,res){
 
             }
 
-            req.flash('success', 'Post and associated comments Deleted Succesfully! by A');
+            req.flash('success', 'Post and associated comments Deleted Succesfully!');
 
             return res.redirect('back');
         }
