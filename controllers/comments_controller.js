@@ -15,8 +15,23 @@ module.exports.create=async function(req,res){
                 post:req.body.post
             });
 
-            post.comments.push(comment);
+        // below statement will automatically pick comment_id and put it in comments array of post
+            post.comments.push(comment);  
             post.save();
+
+            if (req.xhr){
+                // Similar for comments to fetch the user's id!
+              
+                comment = await comment.populate('user', 'name');
+                // .execPopulate()
+                
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Comment Added!"
+                });
+            }
 
             req.flash('success','comment added!');
 
@@ -69,6 +84,16 @@ module.exports.destroy=async function(req,res){
                 // console.log('post and user matched');
                 comment.remove();
                 await Post.findByIdAndUpdate(post.id,{ $pull: {comments: req.params.id} });
+
+            // send the comment id which was deleted back to the views
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        comment_id: req.params.id
+                    },
+                    message: "Comment deleted"
+                });
+            }
                 
                 req.flash('success','comment deleted succesfully !');
                 return res.redirect('back');
@@ -82,6 +107,16 @@ module.exports.destroy=async function(req,res){
                 comment.remove();
     
                 await Post.findByIdAndUpdate(postId,{ $pull: {comments: req.params.id} });
+
+            // send the comment id which was deleted back to the views
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        comment_id: req.params.id
+                    },
+                    message: "Comment deleted"
+                });
+            }
 
                 req.flash('success','comment deleted succesfully !');
                 return res.redirect('back');
