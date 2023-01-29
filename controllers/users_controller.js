@@ -15,24 +15,59 @@ module.exports.profile=function(req,res){
     
 }
 
-module.exports.update=function(req,res){
-    if(req.user.id == req.params.id){
-        // User.findByIdAndUpdate(req.params.id,{name:req.body.name,email:req.body.email});
+module.exports.update = async function(req,res){
 
-        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
-            if(err){
-                req.flash(err);
+    // if(req.user.id == req.params.id){
+    //     // User.findByIdAndUpdate(req.params.id,{name:req.body.name,email:req.body.email});
+
+    //     User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+    //         if(err){
+    //             req.flash(err);
+    //             return res.redirect('back');
+    //         }
+    //         req.flash('success','Profile Updated!');
+    //         return res.redirect('back');
+    //     });
+
+    // }else{
+    //     // someone fiddled with our form means logged in user can update the profile of other user by inspect
+    //     req.flash('error','Unauthorized');
+    //     return res.status(401).send('Unauthorized');
+    // }
+
+    if(req.user.id == req.params.id){
+        
+            try{
+
+                let user= await User.findById(req.params.id);
+                User.uploadedAvatar(req,res,function(err){
+                    if(err){console.log('******Multer Errror :',err);}
+
+                    console.log(req.file);
+                    user.name=req.body.name;
+                    user.email=req.body.email;
+
+                    if(req.file){
+                        user.avatar = User.avatarPath + '/' +req.file.filename;
+                    }
+                    user.save();
+                    return res.redirect('back');
+                    
+                });
+
+
+            }catch(err){
+                req.flash('error',err);
                 return res.redirect('back');
             }
-            req.flash('success','Profile Updated!');
-            return res.redirect('back');
-        });
+
 
     }else{
         // someone fiddled with our form means logged in user can update the profile of other user by inspect
         req.flash('error','Unauthorized');
         return res.status(401).send('Unauthorized');
     }
+
 }
 
 // Render the sign Up Page
