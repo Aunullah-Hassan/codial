@@ -3,7 +3,7 @@
 <!-- But this will be included in body off layout.ejs file  -->
     <h1>Profile \ <%= title %> </h1>
 
-    <img src="<%= user.avatar %>" alt="<%= user.name %>" >
+    <img src="<%= user.avatar %>" alt="<%= user.name %>" width="150">
 
     <% if(locals.user.id == profile_user.id){ %>
     <!-- If user logged in matches to that of profile user then show the form -->
