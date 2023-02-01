@@ -5,9 +5,12 @@ const ExtractJWT=require('passport-jwt').ExtractJwt;
 const User=require('../models/user');
 
 let opts={
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'codial'
 }
+
+// An example configuration which reads the JWT from the http Authorization header with the scheme 'bearer':
+// sir told header is a list of keys & has a key called authorization which also has a list of keys so that can have a key called bearer And that bearer will be having the JWT Token
 
 passport.use(new JWTStrategy(opts,function(jwtPayLoad,done){
 

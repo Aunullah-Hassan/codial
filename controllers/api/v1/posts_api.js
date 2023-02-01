@@ -29,7 +29,7 @@ module.exports.destroy=async function(req,res){
 
         let post=await Post.findById(req.params.id);
         // Check if one deleting the post is same as the One who have created the post(3rd level Authorization)
-        // if(post.user == req.user.id){
+        if(post.user == req.user.id){
             // .id means converting the object id into string
             
             post.remove();
@@ -42,11 +42,12 @@ module.exports.destroy=async function(req,res){
             })
 
 
-        // }
-        // else{
-        //     req.flash('error', 'You cannot delete this post');
-        //     return res.redirect('back');
-        // }
+        }
+        else{
+            return res.json(401,{
+                mesage: "you cannot delete this Post!"
+            });
+        }
 
     }catch(err){
         console.log("Error in deleting post catch block",err);
