@@ -145,6 +145,8 @@
 // HOME POSTS CODE AS EXPLAINED BY SIR WORKING
 
 {   
+
+
     // method to submit the form data for new post using AJAX
     let createPost = function(){
         let newPostForm = $('#new-post-form');
@@ -248,7 +250,7 @@
 
     // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
     let convertPostsToAjax = function(){
-
+        // console.log('convert posts to Ajax function called');
         $('#posts-list-container>ul>li').each(function(){
             let self = $(this);
             let deleteButton = $(' .delete-post-button', self);

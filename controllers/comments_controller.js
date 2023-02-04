@@ -1,10 +1,10 @@
 // const { create } = require('connect-mongo');
-const express=require('express');
-const Comment=require('../models/comment');
-const Post=require('../models/post');
+const express = require('express');
+const Comment = require('../models/comment');
+const Post = require('../models/post');
 const commentMailer = require('../mailers/comments_mailer');
 
-module.exports.create=async function(req,res){
+module.exports.create = async function(req,res){
 
     try{
         let post=await Post.findById(req.body.post);
@@ -19,15 +19,14 @@ module.exports.create=async function(req,res){
         // below statement will automatically pick comment_id and put it in comments array of post
             post.comments.push(comment);  
             post.save();
-
+           
             comment = await comment.populate('user', 'name email');
+            // .execPopulate()
             commentMailer.newComment(comment);
-
+            
             if (req.xhr){
                 // Similar for comments to fetch the user's id!
-              
-                comment = await comment.populate('user', 'name email');
-                // .execPopulate()
+                
                 
                 return res.status(200).json({
                     data: {

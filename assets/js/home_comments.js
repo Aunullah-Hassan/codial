@@ -153,6 +153,7 @@
 class PostComments{ 
     // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
+        // console.log('postComments constructor called');
         this.postId = postId;
         this.postContainer = $(`#post-${postId}`);
         this.newCommentForm = $(`#post-${postId}-comments-form`);
@@ -170,7 +171,7 @@ class PostComments{
 
     createComment(postId){
         let pSelf = this;
-        console.log(' pSelf in createComment is ',pSelf);
+        // console.log(' pSelf in createComment is ',pSelf);
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
@@ -183,11 +184,11 @@ class PostComments{
                 url: '/comments/create',
                 data: $(self).serialize(),
                 success: function(data){
-                    console.log(data);
+                    // console.log(data);
                     let newComment = pSelf.newCommentDom(data.data.comment);
-                    console.log(newComment);
+                    // console.log(newComment);
                     $(`#post-comments-${postId}`).prepend(newComment);
-                    console.log('Prepended sucessfully');
+                    // console.log('Prepended sucessfully');
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
                     new Noty({
