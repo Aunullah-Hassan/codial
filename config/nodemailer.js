@@ -14,6 +14,7 @@ let transporter = nodemailer.createTransport(
         user: 'hassan.aun96@gmail.com',
         pass: 'yzelyurkdtbgqvzd'
     }
+    
 }
 );
 
