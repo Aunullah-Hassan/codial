@@ -1,8 +1,13 @@
-const User=require('../models/user');
-const fs=require('fs');
-const path=require('path');
+const User = require('../models/user');
+const PassToken = require('../models/resetPassToken');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const PassResetMailer = require('../mailers/password_reset_mailer');
+
+const fs = require('fs');
+const path = require('path');
 // let's keep it same as before
-module.exports.profile=function(req,res){
+module.exports.profile = function(req,res){
     // return res.end('<h1>Users Profile Controller');
     User.findById(req.params.id,function(err,user){
 
@@ -162,4 +167,90 @@ module.exports.destroySession=function(req,res,next){
 // becoz i need to send this flash message on the response----------
         res.redirect('/');
       });
+}
+
+module.exports.recoverPassword = function(req,res){
+    
+    return res.render('recover_password_form_Screen', {
+        title: "password-Reset"
+    });
+
+}
+
+module.exports.recoverPasswordMail = async function(req, res){
+
+    let user = User.findOne({email : req.body.email},async function(err,user){
+        if(err){console.log("error in finding user :", err); return;}
+
+        if(user){
+
+           let pass_token = await PassToken.create({
+                user : user._id,
+                accesToken : crypto.randomBytes(20).toString('hex'),
+                isValid : true
+            });
+            console.log(pass_token);
+            PassToken.findOne({_id : pass_token._id}).populate('user').exec(function(err,passToken){
+                if(err){console.log('error in populating passtoken', err); return;}
+                PassResetMailer.PassReset(passToken);
+                req.flash('success','Password Recovery link hass been sent to Your Registered email !');
+                
+                return res.redirect('/');
+                
+            });  
+
+        }
+        else{
+            req.flash('success','Invalid email, email addresss not registered !');
+           
+            return res.redirect('back');
+        }
+
+    });
+
+
+}
+
+module.exports.renderChangePasswordScreen = function(req,res){
+    // console.log(req.query.accessToken);
+    return res.render('set_new_password_screen',{
+        title : "Change Password",
+        accesToken : req.query.accessToken
+    });
+
+}
+
+module.exports.checkPasswordToken = function(req, res){
+    // console.log(req.query.accessToken);
+        PassToken.findOne({accesToken : req.query.accessToken}, function(err,pass_token){
+        if(err){console.log('Error in finding password token'); return;}
+            // console.log(pass_token);
+        if(pass_token.isValid){
+             User.findById(pass_token.user, function (err, user) {
+                if(err){console.log('error in finding user in db!',err ); return;}
+
+                if(req.body.password === req.body.confirm_password){
+                    user.password = req.body.password;
+                    user.save();
+                    pass_token.isValid = false;
+                    pass_token.save();
+                       
+                    req.flash('success','Password changed succesfully so please login !');
+                    return res.redirect('/users/sign-in');
+                    
+                }else{
+                    req.flash('error','Password and confirm password did not match !');
+                   
+                    return res.redirect('back');
+                }
+
+            });
+            
+        }
+        else{
+            req.flash('error','Link has expired re-generate the link,click on Forgot Password !');
+    
+            return res.redirect('/users/sign-in');
+        }
+    });
 }
