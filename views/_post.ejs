@@ -10,6 +10,13 @@
         <br>
         <small><%= post.user.name %></small>
     </p>
+    <div>
+        <span><strong>Like</strong></span>
+        <span><i class="fa-solid fa-thumbs-up fa-2x"></i></span>
+        <p>
+            count
+        </p>
+    </div>
     <div class="post-comments">
         <% if(locals.user){%>
             <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="post" class="new-comment-form">
