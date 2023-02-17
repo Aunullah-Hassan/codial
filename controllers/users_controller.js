@@ -3,20 +3,60 @@ const PassToken = require('../models/resetPassToken');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const PassResetMailer = require('../mailers/password_reset_mailer');
+const Friendship = require('../models/friendship');
 
 const fs = require('fs');
 const path = require('path');
 // let's keep it same as before
-module.exports.profile = function(req,res){
+module.exports.profile = async function(req,res){
     // return res.end('<h1>Users Profile Controller');
-    User.findById(req.params.id,function(err,user){
+   try{
+    let friendship;
+    friendship = await Friendship.findOne({to_user: req.params.id,from_user: req.user._id});
+    if(friendship){
 
+            let user = await User.findById(req.params.id);
+            return res.render('user_profile',{
+                title : 'Users Profile',
+                profile_user: user,
+                isFriend:true
+            });
+
+    }
+
+    friendship = await Friendship.findOne({to_user: req.user._id,from_user: req.params.id});
+    if(friendship){
+
+        let user = await User.findById(req.params.id);
+            return res.render('user_profile',{
+                title : 'Users Profile',
+                profile_user: user,
+                isFriend:true
+            })
+
+    }
+
+        let user = await User.findById(req.params.id);
         return res.render('user_profile',{
-            title:'Users Home',
-            profile_user:user
+            title : 'Users Profile',
+            profile_user: user,
+            isFriend:false
         });
-// in above statement we need to be careful while deciding key as user already exists in local so i use profile_user
-    });
+     
+   }catch(err){
+        req.flash('error',"Error in rending profile page (:");
+        return res.redirect('back');
+   }
+    
+
+//     User.findById(req.params.id,function(err,user){
+
+//         return res.render('user_profile',{
+//             title:'Users Home',
+//             profile_user:user
+//         });
+// // in above statement we need to be careful while deciding key as user already exists in local so i use profile_user
+//     });
 
     
 }

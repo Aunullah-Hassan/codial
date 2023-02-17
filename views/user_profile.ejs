@@ -22,4 +22,26 @@
         <p> <%= profile_user.name %> </p>
         <p> <%= profile_user.email %> </p>
 
+        <!-- Button to add and remove user as friend for logged in user  -->
+        <div id="friendship-btn-container">
+            <% if(locals.isFriend){ %>
+
+                <button id="remove-friend-btn">
+                    <a href="/friendships/remove/?id=<%= profile_user._id %>">Remove</a>
+                </button>
+                
+            <%} else { %>
+                <button id="add-friend-btn">
+                    <a href="/friendships/add/?id=<%= profile_user._id %>">ADD</a>
+                </button>
+            <%}%>
+        </div>
+       
+
+    
+        
+        
+
     <% } %>
+   
+    <script src="/js/friends_list.js"></script>

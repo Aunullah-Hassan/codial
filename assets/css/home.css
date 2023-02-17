@@ -5,7 +5,13 @@
   #home-container #feed-posts {
     width: 70%;
     padding: 10px; }
-  #home-container #user-friends {
+  #home-container aside {
+    display: flex;
+    flex-direction: column;
     width: 30%;
     padding: 10px;
     border-left: 1px solid lightslategrey; }
+  #home-container #user-friends {
+    width: 100%; }
+  #home-container #user-friendships-list-container {
+    width: 100%; }

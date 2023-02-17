@@ -79,6 +79,10 @@ module.exports.destroy=async function(req,res){
         // Check if one deleting the post is same as the One who have created the post(3rd level Authorization)
         if(post.user == req.user.id){
             // .id means converting the object id into string
+
+            // CHANGE :: delete the associated likes for the post and all its comments' likes too
+            await Like.deleteMany({likeable: post, onModel: 'Post'});
+            await Like.deleteMany({_id: {$in: post.comments}});
             
             post.remove();
     

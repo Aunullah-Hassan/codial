@@ -28,20 +28,57 @@
         </div>
     </section>
 
-    <section id="user-friends">
-        <h3>Friends List</h3>
+    <aside>
+
+        <section id="user-friends">
+            <h2>Our App Users</h2>
             <% for(u of all_users){ %>
                 <p>
                     <a href="/users/profile/<%= u.id %>"> <%= u.name %> </a>
                 </p>
 
-        <% } %>
+            <% } %>
+        </section>
 
-    </section>
+        <section id="user-friendships-list-container">
+            <h3>Friends List</h3>
+
+            <% if(locals.user) { %>
+
+                <% for(u of logged_user.friendships){ %>
+
+                    <% if(u.from_user.id === locals.user.id) { %>
+                        <p id="friend-<%= u.id %>">
+                            <a href="/users/profile/<%= u.to_user._id %>"> <%= u.to_user.name %> </a>
+                        </p>
+                    <% }
+                    else{%>
+                        <p id="friend-<%= u.id %>">
+                            <a href="/users/profile/<%= u.from_user.id %>"> <%= u.from_user.name %> </a>
+                        </p>
+                    <%}%>
+    
+                <% } %>
+
+            <% } %>
+           
+    
+        </section>
+    
+    </aside>
+
     
 </div>
     <script src="/js/home_comments.js"></script>
     <script src="/js/home_posts.js"></script>
+    <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+<script src="js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>
 
     
     
