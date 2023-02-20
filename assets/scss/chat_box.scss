@@ -1,0 +1,61 @@
+#user-chat-box{
+    width: 280px;
+    height: 325px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border: 2px dotted burlywood;
+    padding: 5px;
+    padding-bottom: 2px;
+
+    #chat-messages-list{
+        padding: 10px;
+        height: 82%;
+        list-style: none;
+        margin: 0;
+        background-color: white;
+        overflow: auto;
+        .other-message{
+            text-align: left;
+		    padding: 5px;
+		    span{
+		    	display: inline-block;
+	    		padding: 15px;
+		    	background-color: #ffa0a0;
+		    }
+        }
+        .self-message{
+            text-align: right;
+		    padding: 5px;
+		   
+		    span{
+		    	 
+	    		display: inline-block;
+	    		padding: 15px;
+    			background-color: #a0dcff;
+		    }
+        }
+    }
+
+    #chat-message-input-container{
+        display: flex;
+        height: 13%;
+        width: 105%;
+        margin-left: -5px;
+        #chat-message-input{
+            flex-grow: 3;
+            height: 87%;
+            border: 1px solid royalblue;
+        }
+        #send-message{
+            background-color: green;
+            color: white;
+            font-size: 1.3rem;
+            text-align: center;
+            height: 96%;
+        }
+    }
+    
+
+
+}
