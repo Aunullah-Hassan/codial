@@ -1,12 +1,13 @@
 const passport=require('passport');
 const JWTStrategy=require('passport-jwt').Strategy;
 const ExtractJWT=require('passport-jwt').ExtractJwt;
+const env = require('./environment');
 
 const User=require('../models/user');
 
 let opts={
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'codial'
+    secretOrKey: env.jwt_secret
 }
 
 // An example configuration which reads the JWT from the http Authorization header with the scheme 'bearer':
