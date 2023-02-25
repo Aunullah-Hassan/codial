@@ -1,0 +1,22 @@
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #7c7770;
+  height: 75px; }
+  footer #footer-signature {
+    padding: 0px 20px; }
+    footer #footer-signature p {
+      color: antiquewhite;
+      font-size: 1.2rem;
+      font-weight: 600; }
+  footer #footer-nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px; }
+    footer #footer-nav a {
+      color: white;
+      font-size: 1.2rem; }
