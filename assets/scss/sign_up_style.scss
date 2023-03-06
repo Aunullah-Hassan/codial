@@ -1,0 +1,64 @@
+#sign-up-heading{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    justify-content: space-evenly;
+    width: 60%;
+    margin: auto;
+    border: 2px solid #5a9106;
+    padding: 0px 40px;
+    .sign-up-input{
+        height: 30px;
+        border: 1px solid #8a2be2;
+        border-radius: 6px;
+    }
+    input[type="submit"]{
+        height: 40px;
+        border: 1px solid blueviolet;
+        border-radius: 6px;
+        background-color: #38bbbf;
+        font-size: 2rem;
+    }
+    input[type="submit"]:hover{
+        background-color: #0a8589;
+    }
+}
+
+#forgot-pass-link{
+    text-align: center;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #f58908;
+    background-color: #edb872;
+}
+#forgot-pass-link>a:hover{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+#google-signIn-link{
+    text-align: center;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #f58908;
+    background-color: #f1dd07;
+    
+}
+#google-signIn-link>a:hover{
+    font-size: 1.2rem;
+    font-weight: 600;
+}

@@ -1,21 +1,9 @@
 const Post=require('../models/post');
 const Comment=require('../models/comment');
 const User=require('../models/user');
+const Like = require('../models/like');
 
 module.exports.create= async function(req,res){
-
-    // Post.create({
-    //     content: req.body.content,
-    //     user: req.user._id
-    // },function(err,post){
-    //     if(err){
-    //         console.log('error in creating a post');
-    //         return;
-    //     }
-
-    //     return res.redirect('back');
-
-    // });
 
     try{
 
@@ -27,11 +15,14 @@ module.exports.create= async function(req,res){
 
         if (req.xhr){
             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
-            post = await post.populate('user', 'name').execPopulate();
+           
+            let populated_post = await Post.findById(post._id).populate('user', 'name');
 
+            // post = await post.populate('user', 'name').execPopulate();
+            
             return res.status(200).json({
                 data: {
-                    post: post
+                    post: populated_post
                 },
                 message: "Post created!"
             });
@@ -55,33 +46,16 @@ module.exports.create= async function(req,res){
 
 module.exports.destroy=async function(req,res){
 
-    // Post.findById(req.params.id,function(err,post){
-
-        // Check if one deleting the post is same as the One who have created the post(3rd level Authorization)
-    //     if(post.user == req.user.id){
-    //         // .id means converting the object id into string
-            
-    //         post.remove();
-
-    //         Comment.deleteMany({post:req.params.id},function(err){
-    //             return res.redirect('back');
-    //         });
-    //     }
-    //     else{
-    //         return res.redirect('back');
-    //     }
-    // });
-
-
     try{
 
-        let post=await Post.findById(req.params.id);
+        let post = await Post.findById(req.params.id);
         // Check if one deleting the post is same as the One who have created the post(3rd level Authorization)
         if(post.user == req.user.id){
             // .id means converting the object id into string
 
             // CHANGE :: delete the associated likes for the post and all its comments' likes too
             await Like.deleteMany({likeable: post, onModel: 'Post'});
+
             await Like.deleteMany({_id: {$in: post.comments}});
             
             post.remove();

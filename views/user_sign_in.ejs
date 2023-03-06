@@ -1,4 +1,6 @@
-<h1> User Sign In</h1>
+<link rel="stylesheet" type="text/css" href="<%= assetPath('css/sign_in_style.css') %>">
+
+<h2 id="sign-in-heading">Sign In to  Your Account</h2>
 
 <form action="/users/create-session" method="POST">
     <input type="email" name="email" placeholder="Email" required>
@@ -7,12 +9,13 @@
 
 </form>
 
-<p>
+<p id="forgot-pass-link">
     <a href="/users/reset_password" >Forgotten password?</a>
 </p>
 
-<p>
+<p id="google-signIn-link">
 
     <a href="/users/auth/google"> Google Sign In/Sign up  </a>
 </p>
+
 

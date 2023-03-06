@@ -2,13 +2,14 @@
     <p>
         <% if(locals.user && locals.user.id == post.user.id){%>
             <small class="delete-post-button">
-                <a href="/posts/destroy/<%= post.id %>">X</a>
+                <a href="/posts/destroy/<%= post.id %>"><i class="fa-solid fa-trash"></i></a>
             </small>
         <% } %>
 
         <%= post.content %>
+        
         <br>
-        <small><%= post.user.name %></small>
+        <small class="post-username"><%= post.user.name %></small>
     </p>
 
 <!-- CHANGE :: display the likes of this post, if the user is logged in, then show the link to toggle likes, else, just show the count -->

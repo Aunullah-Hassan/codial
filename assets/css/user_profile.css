@@ -1,2 +1,52 @@
 body {
   background-color: lightblue; }
+  body #layout-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    body #layout-main #profile-container {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: aquamarine;
+      color: brown; }
+      body #layout-main #profile-container form {
+        display: flex;
+        flex-direction: column;
+        height: 50vh;
+        justify-content: space-evenly;
+        width: 60%;
+        margin: auto;
+        border: 2px solid #5a9106;
+        padding: 0px 40px; }
+        body #layout-main #profile-container form input[type="email"] {
+          height: 30px;
+          border: 1px solid #8a2be2;
+          border-radius: 6px; }
+        body #layout-main #profile-container form input[type="text"] {
+          height: 30px;
+          border: 1px solid #8a2be2;
+          border-radius: 6px; }
+        body #layout-main #profile-container form input[type="submit"] {
+          height: 40px;
+          border: 1px solid blueviolet;
+          border-radius: 6px;
+          background-color: #38bbbf;
+          font-size: 2rem; }
+        body #layout-main #profile-container form input[type="submit"]:hover {
+          background-color: #0a8589; }
+    body #layout-main #friendship-btn-container > button {
+      width: 180px;
+      height: 35px;
+      margin-bottom: 10px;
+      background-color: gainsboro;
+      border: 2px solid aliceblue;
+      border-radius: 10px; }
+      body #layout-main #friendship-btn-container > button a {
+        text-decoration: none;
+        color: #07070c;
+        font-size: 1.1rem; }
+      body #layout-main #friendship-btn-container > button a:hover {
+        font-weight: 700;
+        color: darkblue; }

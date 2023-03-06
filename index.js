@@ -43,6 +43,7 @@ if(env.name == 'development'){
         outputStyle: 'extended',
         prefix:'/css'
     }));
+
 }
 
 
@@ -51,7 +52,8 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 // use static files
-app.use(express.static(env.asset_path));
+app.use(express.static(__dirname+env.asset_path));
+
 
 // make the upload path available to the browser
 app.use('/uploads',express.static(__dirname + '/uploads'));

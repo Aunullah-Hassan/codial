@@ -1,6 +1,8 @@
 <!-- Code to Create Chat Box -->
 <% if(locals.user) { %> 
 
+<div id="chat-box-container" class="displayBlock">
+    <div id="minimize-chat-box" class="displayFlex">X</div>
     <div id="user-chat-box">
         <ul id="chat-messages-list">
     
@@ -21,5 +23,36 @@
         </div>
     
     </div>
+    
+</div>
+
+<div id="minimized-chat-box" class="displayToggle">C</div>
 
 <% } %>
+<script>
+
+    let minimize_btn = $('#minimize-chat-box');
+    let maximize_btn = $('#minimized-chat-box');
+    let chat_box = $('#chat-box-container');
+    minimize_btn.click(function(e){
+        chat_box.toggleClass('displayBlock');
+        chat_box.toggleClass('displayToggle');
+        maximize_btn.toggleClass('displayToggle');
+        maximize_btn.toggleClass('displayBlockFlex');
+       
+        minimize_btn.toggleClass('displayFlex');
+        minimize_btn.toggleClass('displayToggle');
+       
+    });
+
+    maximize_btn.click(function(e){
+        chat_box.toggleClass('displayToggle');
+        chat_box.toggleClass('displayBlock');
+        maximize_btn.toggleClass('displayBlockFlex');
+        maximize_btn.toggleClass('displayToggle');
+        
+        minimize_btn.toggleClass('displayFlex');
+        minimize_btn.toggleClass('displayToggle');
+    });
+
+</script>

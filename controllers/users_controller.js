@@ -49,15 +49,6 @@ module.exports.profile = async function(req,res){
    }
     
 
-//     User.findById(req.params.id,function(err,user){
-
-//         return res.render('user_profile',{
-//             title:'Users Home',
-//             profile_user:user
-//         });
-// // in above statement we need to be careful while deciding key as user already exists in local so i use profile_user
-//     });
-
     
 }
 

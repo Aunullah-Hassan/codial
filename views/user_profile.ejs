@@ -1,9 +1,12 @@
 
 <link rel="stylesheet" href="<%= assetPath('css/user_profile.css') %>">
 <!-- But this will be included in body off layout.ejs file  -->
-    <h1>Profile \ <%= title %> </h1>
+    <h1>Your Profile </h1>
+   
 
-    <img src="<%= user.avatar %>" alt="<%= user.name %>" width="150">
+<div id="profile-container">
+
+    <img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="150">
 
     <% if(locals.user.id == profile_user.id){ %>
     <!-- If user logged in matches to that of profile user then show the form -->
@@ -27,21 +30,19 @@
             <% if(locals.isFriend){ %>
 
                 <button id="remove-friend-btn">
-                    <a href="/friendships/remove/?id=<%= profile_user._id %>">Remove</a>
+                    <a href="/friendships/remove/?id=<%= profile_user._id %>">REMOVE FRIEND</a>
                 </button>
                 
             <%} else { %>
                 <button id="add-friend-btn">
-                    <a href="/friendships/add/?id=<%= profile_user._id %>">ADD</a>
+                    <a href="/friendships/add/?id=<%= profile_user._id %>">ADD FRIEND</a>
                 </button>
             <%}%>
         </div>
        
 
-    
-        
-        
-
     <% } %>
+
+</div>
    
     <script src="<%= assetPath('js/friends_list.js') %>"></script>

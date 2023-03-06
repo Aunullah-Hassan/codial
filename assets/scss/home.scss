@@ -5,6 +5,94 @@
         #feed-posts{
             width: 70%;
             padding: 10px;
+            background-color: #dde1e5;
+            h2{
+                text-align: center;
+            }
+            #new-post-form{
+                border: 2px solid;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                height: 200px;
+                width: 60%;
+                margin: auto;
+                background-color: antiquewhite;
+                h2{
+                    margin: 0;
+                    border-bottom: 2px solid aliceblue;
+                }
+                textarea{
+                    height: 60%;
+                    border-radius: 15px;
+                    border: 1px solid #0d7c12;
+                    padding-top: 5px;
+                    padding-left: 10px;
+                    font-size: 1rem;
+                }
+                input[type="submit"]{
+                    height: 30px;
+                    background-color: deepskyblue;
+                    border-radius: 10px;
+                }
+                input[type="submit"]:hover{
+                    box-shadow: 0px 0px 3px 2px dodgerblue;
+                    cursor: pointer;
+                }
+
+            }
+
+            #posts-list-container {
+                li{
+                    
+                    list-style: none;
+                    background-color: white;
+                    border: 1px solid white;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    box-shadow: 0px 0px 3px 2px #f1ebe3;
+                    padding: 0px 5px 5px 10px;
+                    p{
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .post-username{
+                        color: brown;
+                        font-weight: 600;
+                    }
+                    .new-comment-form{
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: rgb(240,242,245);
+                        border-radius: 10px;
+                        margin-bottom: 5px;
+                        input[type="text"]{
+                            height: 28px;
+                            width: 70%;
+                            border: none;
+                            background: none;
+                        }
+                        input[type="submit"]{
+                            background-color: azure;
+                            border: none;
+                            border-radius: 10px;
+                            box-shadow: -2px 0px 2px 1px;
+                        }
+                        input[type="submit"]:hover{
+                            font-weight: 700;
+                            transform: scale3d(1.1, 1.1,1);
+                        }
+
+                    }
+                    .comment-container{
+                        background-color: rgb(240,242,245);
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 10px;
+                    }
+
+                }
+            }
         }
         aside{
             display: flex;
@@ -13,13 +101,22 @@
             // height: 100%;
             padding: 10px;
             border-left: 1px solid lightslategrey;
+            background: linear-gradient(90deg, cadetblue, #a1f1d6);
         }
         #user-friends{
             width: 100%;
-            
+            a:hover{
+                font-weight: 600;
+                opacity: 0.6;
+            }
         }
         #user-friendships-list-container{
             width: 100%;
+            .friends-profile-link>a:hover{
+                font-weight: 600;
+                opacity: 0.6;
+            }
+
         }
 
 }

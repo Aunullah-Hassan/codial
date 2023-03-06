@@ -4,7 +4,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 10px;
+    padding: 3px 10px 3px 10px;
         #header-logo{
             height: 60%;
             font-size: 1.2rem;
@@ -17,6 +17,10 @@ header{
                         }
                 }
         }
+        #header-logo:hover{
+            color: aqua;
+            opacity: 0.8;
+        }
         #header-nav{
             margin: 0;
             list-style: none;
@@ -24,10 +28,14 @@ header{
             padding: 0;
             height: 100%;
             align-items: center;
-            width: 125px;
-            justify-content: space-around;
+            width: 170px;
+            justify-content: space-between;
                 a{
-                    color: white;
+                    color: gold;
+                }
+                li:hover{
+                    font-weight: 800;
+                    
                 }
         }
 }
