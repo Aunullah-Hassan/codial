@@ -1,21 +1,7 @@
-[0mGET /users/profile/63bf7102af2092ad3c8a28c3 [36m302[0m 5.800 ms - 72[0m
-[0mGET /users/sign-in [32m200[0m 557.641 ms - 2286[0m
-[0mPOST /users/create-session [36m302[0m 257.671 ms - 46[0m
-[0mGET / [32m200[0m 370.668 ms - 26945[0m
-[0mGET /users/profile/63bf7102af2092ad3c8a28c3 [32m200[0m 554.673 ms - 2601[0m
-[0mGET / [32m200[0m 68.196 ms - 26625[0m
-[0mGET /users/profile/63db010d8c388ff907c77b3e [32m200[0m 19.046 ms - 2562[0m
-[0mGET / [32m200[0m 65.928 ms - 26625[0m
-[0mGET /users/profile/63bf71ceaf2092ad3c8a28c7 [32m200[0m 15.426 ms - 2608[0m
-[0mGET / [32m200[0m 69.189 ms - 26625[0m
-[0mGET / [32m200[0m 1627.166 ms - 18275[0m
-[0mGET /favicon.ico [33m404[0m 397.681 ms - 150[0m
-[0mGET /users/sign-in [36m304[0m 76.108 ms - -[0m
-[0mPOST /users/create-session [36m302[0m 96.573 ms - 46[0m
-[0mGET / [32m200[0m 99.248 ms - 30031[0m
-[0mGET /users/profile/63bf7102af2092ad3c8a28c3 [32m200[0m 67.725 ms - 2681[0m
-[0mGET / [32m200[0m 133.585 ms - 29711[0m
-[0mGET /users/profile/63bf71ceaf2092ad3c8a28c7 [32m200[0m 24.985 ms - 2548[0m
-[0mGET / [36m304[0m 70.387 ms - -[0m
-[0mGET /users/profile/63cb48a1ecad3eedbff4c172 [32m200[0m 21.619 ms - 2520[0m
-[0mGET / [36m304[0m 83.395 ms - -[0m
+::1 - - [06/Mar/2023:21:43:41 +0000] "GET / HTTP/1.1" 200 6970 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+::1 - - [06/Mar/2023:21:43:41 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+::1 - - [09/Mar/2023:21:25:29 +0000] "GET / HTTP/1.1" 200 6970 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+::1 - - [09/Mar/2023:21:25:29 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+::1 - - [09/Mar/2023:22:07:10 +0000] "GET / HTTP/1.1" 200 6970 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+::1 - - [09/Mar/2023:22:07:14 +0000] "GET / HTTP/1.1" 200 6970 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+::1 - - [09/Mar/2023:22:14:40 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"

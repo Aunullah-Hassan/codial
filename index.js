@@ -5,6 +5,7 @@ const logger = require('morgan');
 const cookieParser=require('cookie-parser');
 
 const app=express();
+
 require('./config/view-helpers')(app);
 
 const port=8000;
@@ -52,7 +53,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 // use static files
-app.use(express.static(__dirname+env.asset_path));
+app.use(express.static(env.asset_path));
 
 
 // make the upload path available to the browser
