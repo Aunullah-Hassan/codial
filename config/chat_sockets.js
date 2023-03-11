@@ -6,12 +6,12 @@
 // user initiates the connection Always and then observer detects it and acknowledges that conn has been established hence first go to chat_engine.js
 
 module.exports.chatSockets = function(socketServer){
-    let io = require('socket.io')(socketServer,{
+    let io = require('socket.io')(socketServer, {
         cors: {
-            origin: "http://44.202.214.96:8000",
-            methods: ["GET", "POST"]
-          }
-    });
+          origin: "http://localhost:8000",
+          methods: ["GET", "POST"]
+        }
+      });
 
     io.sockets.on('connection', function(socket){
         console.log('new connection received to observer', socket.id);
